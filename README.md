@@ -1,6 +1,6 @@
 ## 🧪 Flaky Tests Validty Threats
 
-## A) Baseline
+#A) Baseline
 The following parts are copied-over from assignment 2:
 
 
@@ -264,6 +264,26 @@ It fails in installation of 'pyCurl' depending on you O.S. and your SSL settings
 
 ![Alt text](doc/diagrams/whenempty-cloning-ignored.png?raw=true "   ")
 
-B) Experiment
+
+---------------------
+
+# B) Experiment
 Here we explain the effort to show the existence and addressing one of the threats to validity found in this article:
 
+## Threat:
+
+## Traces:
+
+## Theory:
+
+## Feasibility:
+
+## Implementation:
+
+## Results:
+
+## Requirements:
+
+## Process:
+
+## Data:
