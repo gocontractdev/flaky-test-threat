@@ -63,7 +63,7 @@ Software:
 ## Process:
 The general re-creation work done by us goes through the following steps:
 
-![Alt text](https://github.com/gocontractdev/flaky-tests-reproduction/doc/diagrams/general-procedure.png?raw=true "General Procedure")
+![Alt text](https://github.com/gocontractdev/flaky-tests-reproduction/blob/main/doc/diagrams/general-procedure.png?raw=true "General Procedure")
 
 0- Re-organize: the original repository is very poorly organized the data and codes are mixed we will automatically clone and reorganize it in right places.
 
