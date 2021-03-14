@@ -268,15 +268,36 @@ It fails in installation of 'pyCurl' depending on you O.S. and your SSL settings
 ---------------------
 
 # B) Experiment
-Here we explain the effort to show the existence and addressing one of the threats to validity found in this article:
+In this assignment, we would investigate one of the threats to internal validity found in "What is the Vocabulary of Flaky Tests?“ paper.
+The threat and the rationale behind it are as follows:
 
 ## Threat:
+This paper discusses a semi-automated procedure to generate a model for detecting flaky tests.
+The model, relies on the tokens (or simply keywords) extracted and learned from the flaky and non-flaky test cases.
+Although the flaky tests have been confirmed both by human readers and through running them multiple times, not enough confidence for tests labeled as non-flaky is established.
+In other words, the paper only relies on estimations for the tests labeled as non-flaky without proving nor justifying the choice of 100 re-runs to assure a single test is non-flaky.
+ 
+Hence, a massive threat to internal validity of this work exists in the initial labelling section.
+If one or more tests that attribute to flaky behaviour are labeled incorrectly, the final model may struggle in detecting true patterns and tokens attributing to each class.
 
 ## Traces:
+Finding the traces for the threats to validity of the present paper is rather easy, since they are all thoroughly mentioned in the section „6.1 Threats to Validity“. The authors also mentioned it back in the section  „4 Objective of Analysis“:
+ 
+„Indeed, the diagnosis of non-flakiness is an estimate—there is no guarantee a test is non-flaky with a given number of runs“ *1 (4 Objective of Analysis)
+ 
+This sentence openly states that we do not have a guarantee for non-flakiness and this is in-fact a probability.
+ 
+„When performing our first experiment (running the test cases of 24 Java projects 100 times to find flaky tests), we noticed that 55% of the test cases passed 99 times, and failed just once. This result suggests that the strategy of rerunning tests several times to detect flakiness could miss cases of flakiness as tests could have been insufficiently executed“ *1 (6.1 Threats to Validity)
+ 
+The statistics mentioned over here is rather alarming. Claiming that running tests 99 times could result in missing almost half of their flaky tests suggests that maybe the chosen threshold is far from optimal.
 
 ## Theory:
+As mentioned above, it seems like the initial non-flaky test cases used in training the model might be labeled incorrectly. I have quoted parts of the paper that confirm this threat potentially exists. My hypothesis is : „Executing test cases more than 100 times can result in finding previously undetected flaky tests“. I will try to falsify this hypothesis. To do so, I will run a set of tests exhaustively to find a new more optimal threshold for reruns. Then show more executions do not result in a significant deviations from our confidence interval (or the hypothesis can not be falsified).
 
 ## Feasibility:
+It is obviosuly a heavy task to run unit tests for many times. As a result, I will first try to statistically calculate a new threshold as maximum execution efforts based on the present data we already have access to. Next, I run tests until noticing the first occurrence of a switch in output (true test resulting false or vice versa) or reaching the max threshold for small chosen set of test cases. Lastly, I will compare the original distribution and the new distribution of flaky/ non-flaky tests and find out whether the difference is significant enough.
+ 
+In small scale, this task seems to be feasible, I will try to justify the statistical calculations and avoid introduction of new biases in selection of samples. It is worth mentioning that I might fail in proving the new threshold performs better but still show the threat exists. As for our course, it would be enoguh to only show the re-execution threshold chosen on this paper is not optimal and as a result the trained model of this MSR paper is incomplete and there is a room for study (futher investigations are more time consuming).
 
 ## Implementation:
 
