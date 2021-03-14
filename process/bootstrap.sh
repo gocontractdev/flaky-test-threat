@@ -8,9 +8,14 @@ if [ -d "venv/ez_env/" ]; then
 else
   python -m venv venv/ez_env
 fi
-
 source venv/ez_env/bin/activate
 
+pip install --upgrade pip
+pip --version
+echo 'Installing requirements'
+pip install -r requirements.txt
+pip install "textdistance[extras]" # for speed performance
+echo 'DONE'
 
 # clone and place assignment 2 files here
 if [ -d "data/temp/assignment2/" ]; then

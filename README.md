@@ -317,9 +317,20 @@ To execute the process run the following shell command just like the assignment 
 # to bootstrap and run everything
 zsh ./process/bootstrap.sh
 
-# it will prompt and asks question if needed
+> it will prompt and asks question when needed
+
+# if some requirements are failing on MAC it is really just because of Xcode
+# I think after any BigSur update you have to install it
+xcode-select --install
 
 ```
 
 
 ## Data:
+
+
+
+
+----
+
+“Simplicity is the ultimate sophistication”. Leonardo da Vinci
