@@ -63,7 +63,7 @@ Software:
 ## Process:
 The general re-creation work done by us goes through the following steps:
 
-![Alt text](doc/diagrams/general-procedure.png?raw=true "General Procedure")
+![Alt text](https://github.com/gocontractdev/flaky-tests-reproduction/doc/diagrams/general-procedure.png?raw=true "General Procedure")
 
 0- Re-organize: the original repository is very poorly organized the data and codes are mixed we will automatically clone and reorganize it in right places.
 
@@ -99,7 +99,7 @@ zsh ./process/initialization.sh
 ```
 
 👉 Please refer to
-[Process iPython](/process/process.ipynb) file to see the full explanations about the process.
+[Process iPython](https://github.com/gocontractdev/flaky-tests-reproduction/process/process.ipynb) file to see the full explanations about the process.
 
 
 - Important 1: The password is your machine's password (needed for Git Clone).
@@ -109,7 +109,7 @@ zsh ./process/initialization.sh
 - Important 3: I have made a code to make env on the fly but it fails sometimes; easisest way is just to use automatic tool
 if you have PyCharm or InteliJ products:
   
-![Alt text](doc/diagrams/env.png?raw=true "  ")
+![Alt text](https://github.com/gocontractdev/flaky-tests-reproduction/doc/diagrams/env.png?raw=true "  ")
 
  ✅  How to Validate the works?
 --------------------
@@ -148,7 +148,7 @@ Following is the general description of data types along with the schema overvie
 > 
 >  <sup>Note: This part is adopted (in simple words) from the paper. </sup>
 
-The structure of our data: (To see sample parts of data refer to: [Delta iPython](/process/delta.ipynb))
+The structure of our data: (To see sample parts of data refer to: [Delta iPython](https://github.com/gocontractdev/flaky-tests-reproduction/process/delta.ipynb))
 
 A) Input:
 
@@ -254,15 +254,15 @@ deactivate
 It fails in installation of 'pyCurl' depending on you O.S. and your SSL settings it may happen or not happen.
 
 2- Some python files do not actually work. I have modified them to achieve the goals; further on this is explained in 
-[Process iPython](/process/process.ipynb).
+[Process iPython](https://github.com/gocontractdev/flaky-tests-reproduction/process/process.ipynb).
 
 3- For me, without anaconda path it does not work; Make it somehow that zsh and anaconda work fine:
 
-![Alt text](doc/diagrams/anaconda.png?raw=true "  ")
+![Alt text](https://github.com/gocontractdev/flaky-tests-reproduction/doc/diagrams/anaconda.png?raw=true "  ")
 
 4- If you stop process after making folder and before cloning it just skips it becasue it only checks the folder; generally do not stop script it fails completely.
 
-![Alt text](doc/diagrams/whenempty-cloning-ignored.png?raw=true "   ")
+![Alt text](https://github.com/gocontractdev/flaky-tests-reproduction/doc/diagrams/whenempty-cloning-ignored.png?raw=true "   ")
 
 
 ---------------------
