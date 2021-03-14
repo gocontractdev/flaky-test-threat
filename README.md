@@ -272,6 +272,11 @@ In this assignment, we would investigate one of the threats to internal validity
 The threat and the rationale behind it are as follows:
 
 ## Threat:
+
+
+![threat](https://github.com/gocontractdev/flaky-test-threat/blob/main/doc/threatcall.png?raw=true "What is the threat")
+
+
 This paper discusses a semi-automated procedure to generate a model for detecting flaky tests.
 The model, relies on the tokens (or simply keywords) extracted and learned from the flaky and non-flaky test cases.
 Although the flaky tests have been confirmed both by human readers and through running them multiple times, not enough confidence for tests labeled as non-flaky is established.
