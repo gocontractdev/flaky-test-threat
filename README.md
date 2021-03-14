@@ -309,7 +309,17 @@ In small scale, this task seems to be feasible, I will try to justify the statis
 ## Results:
 
 ## Requirements:
-
+ 
 ## Process:
+To execute the process run the following shell command just like the assignment 2:
+
+```shell
+# to bootstrap and run everything
+zsh ./process/bootstrap.sh
+
+# it will prompt and asks question if needed
+
+```
+
 
 ## Data:
