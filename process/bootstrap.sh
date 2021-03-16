@@ -1,5 +1,5 @@
 # This script will only work if you run it from the main not within the process folder
-# Please do not try to do this manually since it brakes the order of operations
+# this is a new version to initialization.sh from previous task
 # reactivate the env (if forgotten)
 deactivate
 # create environment:
@@ -17,7 +17,7 @@ pip install -r requirements.txt
 pip install "textdistance[extras]" # for speed performance
 echo 'DONE'
 
-# clone and place assignment 2 files here
+# clone the assignment 2 files to /data/temp to be processed and placed later on
 if [ -d "data/temp/assignment2/" ]; then
     echo "Already exists -- skipped the cloning..."
 else
@@ -28,6 +28,22 @@ else
   sudo chmod -R g+rw "assignment2/"
   cd "assignment2/"
   git clone https://github.com/gocontractdev/flaky-tests-reproduction.git .
+  # back to the process to run the main python file
+  cd ../../../
+fi
+
+# clone the directory original work to /data/input
+if [ -d "data/input/original_repo/" ]; then
+    echo "Already exists -- skipped the cloning..."
+    # just run the main python file
+else
+  echo "Cloning the original repository; Please Wait..."
+  cd  data/input
+  mkdir "original_repo/"
+  sudo chown -R "original_repo/"
+  sudo chmod -R g+rw "original_repo/"
+  cd "original_repo/"
+  git clone https://github.com/damorimRG/msr4flakiness.git
   # back to the process to run the main python file
   cd ../../../
 fi

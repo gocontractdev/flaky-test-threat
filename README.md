@@ -300,7 +300,7 @@ The statistics mentioned over here is rather alarming. Claiming that running tes
 As mentioned above, it seems like the initial non-flaky test cases used in training the model might be labeled incorrectly. I have quoted parts of the paper that confirm this threat potentially exists. My hypothesis is : „Executing test cases more than 100 times can result in finding previously undetected flaky tests“. I will try to falsify this hypothesis. To do so, I will run a set of tests exhaustively to find a new more optimal threshold for reruns. Then show more executions do not result in a significant deviations from our confidence interval (or the hypothesis can not be falsified).
 
 ## Feasibility:
-It is obviosuly a heavy task to run unit tests for many times. As a result, I will first try to statistically calculate a new threshold as maximum execution efforts based on the present data we already have access to. Next, I run tests until noticing the first occurrence of a switch in output (true test resulting false or vice versa) or reaching the max threshold for small chosen set of test cases. Lastly, I will compare the original distribution and the new distribution of flaky/ non-flaky tests and find out whether the difference is significant enough.
+It is obviously a heavy task to run unit tests for many times. As a result, I will first try to statistically calculate a new threshold as maximum execution efforts based on the present data we already have access to. Next, I run tests until noticing the first occurrence of a switch in output (true test resulting false or vice versa) or reaching the max threshold for small chosen set of test cases. Lastly, I will compare the original distribution and the new distribution of flaky/ non-flaky tests and find out whether the difference is significant enough.
  
 In small scale, this task seems to be feasible, I will try to justify the statistical calculations and avoid introduction of new biases in selection of samples. It is worth mentioning that I might fail in proving the new threshold performs better but still show the threat exists. As for our course, it would be enoguh to only show the re-execution threshold chosen on this paper is not optimal and as a result the trained model of this MSR paper is incomplete and there is a room for study (futher investigations are more time consuming).
 
@@ -329,7 +329,8 @@ xcode-select --install
 ## Data:
 
 
-
+extra files:
+- Files named 'keep' are just extra files used so version control keep the folder in track.
 
 ----
 
