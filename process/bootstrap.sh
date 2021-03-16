@@ -1,5 +1,6 @@
 # This script will only work if you run it from the main not within the process folder
 # this is a new version to initialization.sh from previous task
+
 # reactivate the env (if forgotten)
 deactivate
 # create environment:
