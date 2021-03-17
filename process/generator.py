@@ -9,6 +9,7 @@ import re
 import shutil
 import subprocess
 from pathlib import Path
+import pandas as pd
 
 # base paths - ⚠️ warning: Do not move any files the whole thing breaks apart
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -36,9 +37,18 @@ def main():
     # step 1 - Delegate the work to actuall.py
     print('We are now running actuall.py in Simulation mode')
     os.system('python ' + process_path + '/actuall.py ' + 'SIMULATE')
+    print('Simulation is done we have the main rerun file created out of logs ✅✅✅')
 
-    # step 2 - prepare raw CSV files
+    # step 2 - create a 1% sample set from the original
+    all_reruns = pd.read_csv(input_path + '/' + 'all_reruns.csv', header=None)
+    sample_count = all_reruns.count()[0] * 0.01
+    randomized_sample = all_reruns.sample(round(sample_count))
+    randomized_sample['sample_run'] = ''
+    randomized_sample.to_csv(temp_path + '/sample_runs.csv', index=False,
+                             header=['dir', 'test', 'first_result', 'frequency', 'flaky', 'sample_run'])
 
+    # step 3 - refer to jupyter
+    print('We have now all the files necessary -- Please refer to the iPython notebook: comparison.ipynb')
 
 if __name__ == '__main__':
     main()
