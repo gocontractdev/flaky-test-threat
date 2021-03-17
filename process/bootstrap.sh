@@ -18,6 +18,11 @@ pip install -r requirements.txt
 pip install "textdistance[extras]" # for speed performance
 echo 'DONE'
 
+# remove temp files
+echo "Deleting temp files"
+sudo rm -r 'data/temp/assignment2'
+sudo rm -r 'data/temp/reruns'
+
 # clone the assignment 2 files to /data/temp to be processed and placed later on
 if [ -d "data/temp/assignment2/" ]; then
     echo "Already exists -- skipped the cloning..."
