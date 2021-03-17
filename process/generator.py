@@ -28,12 +28,13 @@ def main():
     # Step 0 - copy assignment 2 process files
     print('Step 0 : Copying base files to the input directory -- Please wait..')
 
-    shutil.copy(assignment2_path + '/process/actuall.py',
-                process_path + '/actuall.py')
+    #shutil.copy(assignment2_path + '/process/actuall.py',
+    #            process_path + '/actuall.py')
     shutil.copy(assignment2_path + '/process/initialization.sh',
                 process_path + '/initialization.sh')
 
     # step 1 - Delegate the work to actuall.py
+    print('We are now running actuall.py in Simulation mode')
     os.system('python ' + process_path + '/actuall.py ' + 'SIMULATE')
 
     # step 2 - prepare raw CSV files
