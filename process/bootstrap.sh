@@ -20,7 +20,7 @@ echo 'DONE'
 
 # remove temp files
 echo "Deleting temp files"
-#sudo rm -r 'data/temp/assignment2'
+sudo rm -r 'data/temp/assignment2'
 sudo rm -r 'data/temp/reruns'
 
 # clone the assignment 2 files to /data/temp to be processed and placed later on

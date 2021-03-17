@@ -28,8 +28,8 @@ def main():
     # Step 0 - copy assignment 2 process files
     print('Step 0 : Copying base files to the input directory -- Please wait..')
 
-    #shutil.copy(assignment2_path + '/process/actuall.py',
-    #            process_path + '/actuall.py')
+    shutil.copy(assignment2_path + '/process/actuall.py',
+                process_path + '/actuall.py')
     shutil.copy(assignment2_path + '/process/initialization.sh',
                 process_path + '/initialization.sh')
 
