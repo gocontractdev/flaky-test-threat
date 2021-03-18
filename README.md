@@ -517,4 +517,11 @@ extra files:
 
 ----
 
+🚑 On emergency case if the comparison jupyter did not load on github use the mirror.
+
+https://nbviewer.jupyter.org/github/gocontractdev/flaky-test-threat/blob/main/process/comparison.ipynb
+
+If both did not work contact me. Best,
+
+
 “Simplicity is the ultimate sophistication”. Leonardo da Vinci
