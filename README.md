@@ -299,18 +299,74 @@ The statistics mentioned over here is rather alarming. Claiming that running tes
 ## Theory:
 As mentioned above, it seems like the initial non-flaky test cases used in training the model might be labeled incorrectly. I have quoted parts of the paper that confirm this threat potentially exists. My hypothesis is : „Executing test cases more than 100 times can result in finding previously undetected flaky tests“. I will try to falsify this hypothesis. To do so, I will run a set of tests exhaustively to find a new more optimal threshold for reruns. Then show more executions do not result in a significant deviations from our confidence interval (or the hypothesis can not be falsified).
 
+
+Our hypothesis based on information we have about the paper is as follows:
+
+H0: Executing tests more than 100 times will not result in finding significantly more flaky tests.
+
+Ha: Alternative Hypothesis claims 100 is not close to ideal and there is possible to find an optimal re-run threshold that results in finding signfincantly more flaky tests.
+
+> For the complete formation of hypothesis you can refer to [comparison jupyter file](./process/comparison.ipynb).
+
 ## Feasibility:
 It is obviously a heavy task to run unit tests for many times. As a result, I will first try to statistically calculate a new threshold as maximum execution efforts based on the present data we already have access to. Next, I run tests until noticing the first occurrence of a switch in output (true test resulting false or vice versa) or reaching the max threshold for small chosen set of test cases. Lastly, I will compare the original distribution and the new distribution of flaky/ non-flaky tests and find out whether the difference is significant enough.
  
 In small scale, this task seems to be feasible, I will try to justify the statistical calculations and avoid introduction of new biases in selection of samples. It is worth mentioning that I might fail in proving the new threshold performs better but still show the threat exists. As for our course, it would be enoguh to only show the re-execution threshold chosen on this paper is not optimal and as a result the trained model of this MSR paper is incomplete and there is a room for study (futher investigations are more time consuming).
 
-## Implementation:
+## ⚙️ Implementation:
+Since in this project I am mainly using Shell and Python scrips the implementation of the exact hypothesis into code was not very challenging however I had to do some extra steps to have all the files necessary for the test:
+
+0- Modify the assignment 2 to work properly here:
+
+actuall.py file from previous assignment needed an extra state ['SIMULATE'] in which it could process and save files in a format needed for this assignment. Instead of multiple text log files for each run time we required a csv to simply track the frequency and the flakiness of each test. 
+We have achived this by adding a run-time argument and a state check on actuall.py:
+
+```shell
+# run through OS shell
+os.system('python ' + process_path + '/actuall.py ' + 'SIMULATE')
+
+# in actuall.py 
+if len(sys.argv) >= 2:
+   simulate_mode()
+```
+
+simulate_mode is rather an I/O heavy process since it has to open multiple project. For each proeject it will find all logs of each 100 re-execuations and for each re-execution reads line-by-line each test execution and tracks comulate all results in all_reruns.csv.
+So, it has time complexity of 03.
 
 
+1- Generation and Placement:
+
+generator.py is the new file that takes care of placing files or codes in the right directory and generating raw samples to be tested; it collects 1% of the total population randomly. 
+
+2- Actual Testing:
+
+For actual testing and comparison, I have used the well-known python libraries. This file, reads the csv file; calculates the mean and sigma and handles the underlying science needed to compare samples.
 
 > For the complete explanation you can refer to [comparison jupyter file](./process/comparison.ipynb).
 
-## Results:
+## 📈 Results:
+The main idea of us was to first prove the chosen number of 100 for number of re-executions is sub-optimal. We had done it through
+statitical calculations. We have calculated the new threshold of (mu + 3 x Sigma) as it is very unlikely to see any value after this distance from mean of a population.
+The new threshold is calculated to as: 163.
+
+Next, I tried to nullify our hypothesis by showing that our samples are significantly far from original distribution.
+We have used 561 (1 % of populations) samples for our hypothesis. The sample mean and standard deviation are as follows:
+
+sample mean: 110.44
+
+st: 42.3
+
+![Alt text](https://github.com/gocontractdev/flaky-test-threat/blob/main/doc/dist.png?raw=true "  ")
+- The diagram compares the population distribution [blue] with the sample distribution [orange]
+
+With our assumption of having the normal gaussian distribution these numbers result in z-score of 0.287 which is too small to reject the null hypothesis.
+This means we have only 61% confidence that our the difference is significant. This shows a room for further sampling or investigations.
+Random reshuffling, multiple sampling or using a better distribution (than normal) would improve the invstigations however it would take too much effort.
+With the existing calculations we can not nullify the hypothesis without more advanced investigations.
+
+
+
+> For the accessing all charts and summary you can refer to [comparison jupyter file](./process/comparison.ipynb).
 
 ## Requirements:
 The requirements for this task do not surpass the assignment 2. In fact most heavy processes take place in assginment 2.
@@ -333,6 +389,21 @@ Software:
 (For running base shell here you DO NOT need this).
 
 ## Process:
+The general steps for the process of verifying and addressing the threat is as follows:
+
+0- Boostrapping: The shell file will automatically install and clone required repositories and places them on the right spots. 
+Afterward it runs the generator.py to grab the files necessary from the previous assignment and to run actuall.py.
+
+1- Simulate: actuall.py is actually the main python script from the previous task. I have modified it here to accept a runtime argument: "SIMULATE". 
+When running actuall.py on simualte mode it will only process the reruns folder to make all_reruns.csv. This file basically includes 
+all the test cases used in the work (± 568000). For each test case the information about its location and the whether falky behavior has been observed is stored.
+If flaky behavior is observed the column 'frequency' shows number of re-execution when the test first showed flipping behavior and was confirmed to be flaky.
+
+2- Sample: In this step we collect a random sample with 1% size of original population from the all_reruns. Test files selected will be stored temporary in sample_runs.csv. These tests have to be executed multiple times.
+
+3- Comapre: This last step is done in [comparison jupyter](./process/comparison.ipynb). We compare the population and our sampling distribution to see if the difference is really significant enough to nullify the base hypothesis.
+
+
 To execute the process run the following shell command. It automatically initiates and runs all necessary codes:
 
 ```shell
@@ -347,6 +418,7 @@ xcode-select --install
 
 ```
 
+- Important: Please refer to assignment 2 for debuging or help.
 
 ## Data:
 Our data structure is rather easy this time. We have the same folder structure as before:
