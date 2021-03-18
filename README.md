@@ -404,7 +404,8 @@ If flaky behavior is observed the column 'frequency' shows number of re-executio
 3- Comapre: This last step is done in [comparison jupyter](./process/comparison.ipynb). We compare the population and our sampling distribution to see if the difference is really significant enough to nullify the base hypothesis.
 
 
-To execute the process run the following shell command. It automatically initiates and runs all necessary codes:
+To execute the process run the following shell command. It automatically initiates and runs all necessary codes.
+You need to have the ez_env python virtual env just like the previus assigment. If you use modern IDEs (like InteliJ's PyCharm) it automatically prompts you to make this environment with the correct name if not just make it by hand.
 
 ```shell
 # to bootstrap and run everything
@@ -416,7 +417,7 @@ zsh ./process/bootstrap.sh
 # I think after any BigSur update you have to install it
 xcode-select --install
 
-```
+``` 
 
 - Important: Please refer to assignment 2 for debuging or help.
 
