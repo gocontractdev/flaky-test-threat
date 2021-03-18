@@ -65,3 +65,5 @@ javalang
 pandas
 python-Levenshtein
 textdistance
+matplotlib
+scipy
