@@ -306,12 +306,34 @@ In small scale, this task seems to be feasible, I will try to justify the statis
 
 ## Implementation:
 
+
+
+> For the complete explanation you can refer to [comparison jupyter file](./process/comparison.ipynb).
+
 ## Results:
 
 ## Requirements:
- 
+The requirements for this task do not surpass the assignment 2. In fact most heavy processes take place in assginment 2.
+
+Minimum Hardware:
+- MacOs Catalina or LTS Linux Distributions
+  
+- Intel Core-i7 x ,2.2 GHZ 6 Cores  
+
+- RAM 16 GB
+  
+Software:
+  
+- Vanilla ZSH bash (or equivalent)
+
+- Python 3.8 or above (use Conda, it should have virtualization)
+
+
+⚠️ For running samples only I would recommend running tests on a server with twice capacity
+(For running base shell here you DO NOT need this).
+
 ## Process:
-To execute the process run the following shell command just like the assignment 2:
+To execute the process run the following shell command. It automatically initiates and runs all necessary codes:
 
 ```shell
 # to bootstrap and run everything
@@ -327,10 +349,98 @@ xcode-select --install
 
 
 ## Data:
+Our data structure is rather easy this time. We have the same folder structure as before:
+
+- /input:
+    - /original_repo: This is the original repository from the authors of the paper.
+    - /all_reruns: There are multiple log files in the original repo that show the result of 100 times re-executing every test case.
+      This file gathers all tests and calculates the frequencies till observing frequency behavior. The structure of it is as follows:
+      
+    > Example: all_reruns.csv ± 568000 tests 
+    >
+    > dir,test,first_result,frequency,flaky,
+     ch.qos.logback.core.ContextBaseTest,contextThreadpoolIsDaemonized,pass,100,False,
+     org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactoryTests,noCompressionForSmallResponse,pass,100,False,
+     alluxio.client.cli.fs.command.CopyFromLocalCommandIntegrationTest,copyFromLocalDir,pass,100,False,
+     org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfigurationTests,emptyTemplateLocation{CapturedOutput},pass,100,False,
+     org.apache.hadoop.log.TestLogThrottlingHelper,testNamedLoggersWithoutSpecifiedPrimary,pass,100,False,
+    ...
+  
+    1- dir: Location of the test file.
+    
+    2- test: name of the test file.
+    
+    3- first_result: result of the first run; it is either PASS or ERROR. 
+    This is used to compare with any following trails to see if the flaky behavior is observed.
+    
+    4- frequency: It is a boolean. When a test shows a flipping behavior and change from PASS to ERROR or vice-versa this boolean is set to TRUE.
+    
+    - /list-flaky.csv: Not used in this assignment.
+    
+    - /historical_projects.csv: Not used in this assignment.
+    
+    - /historical_rerun_flaky_tests.csv: Not used in this assignment.
+
+    - /ez_mode:
+    - ℹ️ sample_runs.csv: This file will be generated in temp however it has to be ran manually. These are the samples I tested from the temp output.  
+    - ℹ️ all_reruns.csv: Same as calculated file exaplined above. This is a backup file also is used for fallback in juptyer.
+
+- /temp:
+  - /assignment2: This repository is cloned during the run time and it includes the whole assignment 2 project.
+
+  - /reruns: This is a folder from original work that is cloned and moved here for further processes. 
+    It includes multiple directories each representing one of the tested projects. Each of them have multiple log files with similar format.
+    The 100 log files show the outcome of 100 re-execution for each test case in a line-by-line standard:
+    
+    > Example: ./some-project/runX.log 
+    > 
+    > alluxio.client.cli.fs.GetConfTest, getConfWithCorrectUnit, pass
+     alluxio.client.cli.fs.GetConfTest, getConfFromMasterWithSource, pass
+     alluxio.client.cli.fs.GetConfTest, getConfByAlias, pass
+     alluxio.client.cli.fs.GetConfTest, getConf, pass
+     alluxio.client.cli.fs.GetConfTest, getConfWithWrongUnit, pass
+     alluxio.client.cli.fs.GetConfTest, getConfWithInvalidConf, pass
+     alluxio.client.cli.fs.GetConfTest, getConfFromMaster, pass
+     alluxio.client.cli.fs.JobServiceFaultToleranceShellTest, distributedMv, error
+     ...
+    
+    Each line represents one test case location and name and the result of the execution.
+    
+  - sample_runs.csv: This is a comma separated csv that is generated on the run time by generator.py.
+    This file includes RANDOMLY chosen test case candidates from all tests (all_reruns) to ran with the new max-run threshold.
+    The format of it is as follows:
+    
+    > Example: sample_runs.csv 
+    >
+    > dir,test,first_result,frequency,flaky,sample_run 
+     ch.qos.logback.core.ContextBaseTest,contextThreadpoolIsDaemonized,pass,100,False,
+     org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactoryTests,noCompressionForSmallResponse,pass,100,False,
+     alluxio.client.cli.fs.command.CopyFromLocalCommandIntegrationTest,copyFromLocalDir,pass,100,False,
+     org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfigurationTests,emptyTemplateLocation{CapturedOutput},pass,100,False,
+     org.apache.hadoop.log.TestLogThrottlingHelper,testNamedLoggersWithoutSpecifiedPrimary,pass,100,False,
+    ...
+    
+    1- dir: Location of the test file.
+    
+    2- test: name of the test file.
+    
+    3- first_result: result of the first run; it is either PASS or ERROR. 
+    This is used to compare with any following trails to see if the flaky behavior is observed.
+    
+    4- frequency: It is a boolean. When a test shows a flipping behavior and change from PASS to ERROR or vice-versa this boolean is set to TRUE.
+    
+    5- smaple_runs: This is the number of runs till observing flaky behavior. If value is equal to the threshold; it is not flaky.
+    
+
+- /output:
+
+There is no special output in for this work. All charts and calculations are stored in comparison jupyter file.
 
 
 extra files:
 - Files named 'keep' are just extra files used so version control keep the folder in track.
+
+- doc folder: doc folder includes some images and graphics used in the comparison jupyter or readme file.
 
 ----
 
